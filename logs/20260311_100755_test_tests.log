@@ -1,0 +1,79 @@
+=== RUN: smart_microscope/test_tests.py ===
+Timestamp: 20260311_100755
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 10:07:55 up 15 min,  2 users,  load average: 0.61, 0.40, 0.23
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       964Mi       1.7Gi        29Mi       1.2Gi       2.8Gi
+Swap:          511Mi          0B       511Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---
+Total images found: 40
+                                          image_path label  ... width height
+0  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+1  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+2  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+
+[3 rows x 7 columns]
+10X: 40 40X: 0
+Test size: 8 Train size: 32
+[INFO] Model Path: /home/anita/pi_tests/smart_microscope/models/wavemix_best_model_Split_1.pth
+Attempting to fetch wavemix model
+Calling Wavemix with 2 number of classes
+[INFO] Building testing dataset and dataloader...
+[INFO] testing dataset size: 8
+[INFO] Running inference...
+[INFO] Grad-CAM disabled (or cytofm model).
+
+[RESULTS]
+Accuracy:    0.7500
+Precision:   1.0000
+Recall:      0.3333
+F1-Score:    0.5000
+Specificity: 1.0000
+Confusion Matrix:
+[[5 0]
+ [2 1]]
+Done. Metrics (summary):
+  predictions: len=8
+  labels: len=8
+  probabilities: tensor([4.8927e-01, 1.6586e-01, 1.4019e-01, 4.4242e-04, 1.6743e-01, 4.0721e-01,
+        3.2071e-01, 8.9029e-01])
+  accuracy: 0.75
+  precision: 1.0
+  recall: 0.3333333333333333
+  f1_score: 0.5
+  specificity: 1.0
+  confusion_matrix: [[5 0]
+ [2 1]]
+	Command being timed: "python smart_microscope/test_tests.py"
+	User time (seconds): 129.39
+	System time (seconds): 3.91
+	Percent of CPU this job got: 249%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:53.38
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 803168
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1237
+	Minor (reclaiming a frame) page faults: 493981
+	Voluntary context switches: 12548
+	Involuntary context switches: 2874
+	Swaps: 0
+	File system inputs: 720424
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+
+--- SYSTEM AFTER ---
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       1.0Gi       1.3Gi        29Mi       1.5Gi       2.7Gi
+Swap:          511Mi          0B       511Mi

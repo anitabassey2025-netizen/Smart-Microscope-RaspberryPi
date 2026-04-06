@@ -1,0 +1,13 @@
+=== RUN: smart_microscope/test_tests.py ===
+Timestamp: Fri 20 Mar 00:26:03 CDT 2026
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 00:26:03 up  1:17,  2 users,  load average: 0.00, 0.83, 2.09
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       978Mi       1.9Gi        23Mi       1.0Gi       2.8Gi
+Swap:          511Mi        53Mi       458Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---

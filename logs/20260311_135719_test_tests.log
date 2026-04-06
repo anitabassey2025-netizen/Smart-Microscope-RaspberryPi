@@ -1,0 +1,78 @@
+=== RUN: smart_microscope/test_tests.py ===
+Timestamp: Wed 11 Mar 13:57:19 CDT 2026
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 13:57:19 up  4:04,  2 users,  load average: 0.10, 0.12, 0.15
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       999Mi       2.1Gi        14Mi       763Mi       2.7Gi
+Swap:          511Mi       132Mi       379Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---
+Total images found: 52
+                                          image_path label  ... width height
+0  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+1  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+2  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+
+[3 rows x 7 columns]
+10X: 52 40X: 0
+Using all images for testing: 52
+[INFO] Model Path: /home/anita/pi_tests/smart_microscope/models/resnet_best_model_Split_1.pth
+Attempting to fetch resnet model
+Calling ResNet18 with 2 number of classes
+[INFO] Building testing dataset and dataloader...
+[INFO] testing dataset size: 52
+[INFO] Running inference...
+[INFO] Grad-CAM disabled (or adapter model).
+
+[RESULTS]
+Accuracy:    0.4808
+Precision:   0.4348
+Recall:      0.9524
+F1-Score:    0.5970
+Specificity: 0.1613
+Confusion Matrix:
+[[ 5 26]
+ [ 1 20]]
+Done. Metrics (summary):
+  predictions: len=52
+  labels: len=52
+  probabilities: tensor([0.1088, 0.9270, 0.8533, 0.0084, 0.8097, 0.9242, 0.5823, 0.1833, 0.7241,
+        0.7962, 0.8243, 0.8931, 0.5771, 0.7062, 0.9990, 0.8034, 0.1401, 0.8856,
+        0.9686, 0.8581, 0.9949, 0.8828, 0.9649, 0.7732, 0.9985, 0.9155, 0.9976,
+        0.8764, 0.9065, 0.9992, 0.4291, 0.9980, 0.9980, 0.9309, 0.9979, 0.6218,
+        0.9939, 0.9982, 0.3090, 0.9966, 0.9966, 0.8579, 0.9956, 0.9937, 0.9976,
+        0.9980, 0.8817, 0.9930, 0.7645, 0.6241, 0.9955, 0.9948])
+  accuracy: 0.4807692307692308
+  precision: 0.43478260869565216
+  recall: 0.9523809523809523
+  f1_score: 0.5970149253731343
+  specificity: 0.16129032258064516
+  confusion_matrix: [[ 5 26]
+ [ 1 20]]
+	Command being timed: "python smart_microscope/test_tests.py --model_name resnet"
+	User time (seconds): 68.27
+	System time (seconds): 1.92
+	Percent of CPU this job got: 232%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:30.24
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 507872
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 216321
+	Voluntary context switches: 2698
+	Involuntary context switches: 2137
+	Swaps: 0
+	File system inputs: 105056
+	File system outputs: 32
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

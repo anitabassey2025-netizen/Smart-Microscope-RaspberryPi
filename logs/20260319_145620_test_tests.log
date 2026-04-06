@@ -1,0 +1,91 @@
+=== RUN: smart_microscope/test_tests.py ===
+Timestamp: Thu 19 Mar 14:56:20 CDT 2026
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 14:56:20 up 11 min,  2 users,  load average: 2.27, 0.92, 0.38
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       965Mi       1.9Gi        25Mi       965Mi       2.8Gi
+Swap:          511Mi       5.0Mi       506Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---
+Total images found: 52
+                                          image_path label  ... width height
+0  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+1  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+2  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+
+[3 rows x 7 columns]
+10X: 52 40X: 0
+Using all images for testing: 52
+[INFO] Model Path: None
+Attempting to fetch hybrid_cytofm_efficientnetv2 model
+Calling Hybrid (CytoFM + EfficientNetV2-S)
+[CytoFM] Unexpected keys: 10 (showing up to 5): ['vit.head.mlp.0.weight', 'vit.head.mlp.0.bias', 'vit.head.mlp.2.weight', 'vit.head.mlp.2.bias', 'vit.head.mlp.4.weight']
+[INFO] Building testing dataset and dataloader...
+[INFO] testing dataset size: 52
+[INFO] Running inference...
+Traceback (most recent call last):
+  File "/home/anita/pi_tests/smart_microscope/test_tests.py", line 62, in <module>
+    results = test.test_model(
+              ^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/test_data.py", line 502, in test_model
+    logits = model(images)
+             ^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/hybrid/hybrid_infer.py", line 286, in forward
+    logit  = self.fusion(fused)              # [1,2]
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/hybrid/hybrid_infer.py", line 126, in forward
+    x = self.proj(fused)           # [B,256]
+        ^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 116, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x1281 and 2048x256)
+Command exited with non-zero status 1
+	Command being timed: "python smart_microscope/test_tests.py --model_name hybrid_cytofm_efficientnetv2"
+	User time (seconds): 258.17
+	System time (seconds): 8.92
+	Percent of CPU this job got: 203%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:11.56
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2243920
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 668
+	Minor (reclaiming a frame) page faults: 1223958
+	Voluntary context switches: 15505
+	Involuntary context switches: 4033
+	Swaps: 0
+	File system inputs: 3346016
+	File system outputs: 24
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

@@ -1,0 +1,75 @@
+=== RUN: smart_microscope/test_tests.py ===
+Timestamp: 20260308_192143
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 19:21:43 up  2:22,  2 users,  load average: 0.13, 0.19, 0.27
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       915Mi       1.6Gi        25Mi       1.3Gi       2.8Gi
+Swap:          511Mi       5.0Mi       506Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---
+Total images found: 40
+                                          image_path label  ... width height
+0  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+1  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+2  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+
+[3 rows x 7 columns]
+10X: 40 40X: 0
+Test size: 8 Train size: 32
+[INFO] Model Path: /home/anita/pi_tests/smart_microscope/models/best_model_Split_1.pt
+Attempting to fetch cytofm model
+Calling CytoFM (Adapter as nn.Module; engine loads backbone+ABMIL).
+Traceback (most recent call last):
+  File "/home/anita/pi_tests/smart_microscope/test_tests.py", line 54, in <module>
+    results = test.test_model(
+              ^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/test_data.py", line 464, in test_model
+    model = ML_models.call_model(model_name)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/ML_models.py", line 181, in call_model
+    return get_CytoFM_Adapter()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/ML_models.py", line 134, in get_CytoFM_Adapter
+    return CytoFMAdapter()
+           ^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/ML_models.py", line 103, in __init__
+    self.engine = CytoFMABMILInference(
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/cytofm/cytofm_infer.py", line 13, in __init__
+    self.backbone = load_cytofm_backbone(cytofm_weights, device=self.device)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/cytofm/cytofm_backbone.py", line 46, in load_cytofm_backbone
+    m.load_state_dict(sd, strict=True)
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 2189, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for FrozenCytoFMViT:
+	Missing key(s) in state_dict: "vit.cls_token", "vit.pos_embed", "vit.patch_embed.proj.weight", "vit.patch_embed.proj.bias", "vit.blocks.0.norm1.weight", "vit.blocks.0.norm1.bias", "vit.blocks.0.attn.qkv.weight", "vit.blocks.0.attn.qkv.bias", "vit.blocks.0.attn.proj.weight", "vit.blocks.0.attn.proj.bias", "vit.blocks.0.norm2.weight", "vit.blocks.0.norm2.bias", "vit.blocks.0.mlp.fc1.weight", "vit.blocks.0.mlp.fc1.bias", "vit.blocks.0.mlp.fc2.weight", "vit.blocks.0.mlp.fc2.bias", "vit.blocks.1.norm1.weight", "vit.blocks.1.norm1.bias", "vit.blocks.1.attn.qkv.weight", "vit.blocks.1.attn.qkv.bias", "vit.blocks.1.attn.proj.weight", "vit.blocks.1.attn.proj.bias", "vit.blocks.1.norm2.weight", "vit.blocks.1.norm2.bias", "vit.blocks.1.mlp.fc1.weight", "vit.blocks.1.mlp.fc1.bias", "vit.blocks.1.mlp.fc2.weight", "vit.blocks.1.mlp.fc2.bias", "vit.blocks.2.norm1.weight", "vit.blocks.2.norm1.bias", "vit.blocks.2.attn.qkv.weight", "vit.blocks.2.attn.qkv.bias", "vit.blocks.2.attn.proj.weight", "vit.blocks.2.attn.proj.bias", "vit.blocks.2.norm2.weight", "vit.blocks.2.norm2.bias", "vit.blocks.2.mlp.fc1.weight", "vit.blocks.2.mlp.fc1.bias", "vit.blocks.2.mlp.fc2.weight", "vit.blocks.2.mlp.fc2.bias", "vit.blocks.3.norm1.weight", "vit.blocks.3.norm1.bias", "vit.blocks.3.attn.qkv.weight", "vit.blocks.3.attn.qkv.bias", "vit.blocks.3.attn.proj.weight", "vit.blocks.3.attn.proj.bias", "vit.blocks.3.norm2.weight", "vit.blocks.3.norm2.bias", "vit.blocks.3.mlp.fc1.weight", "vit.blocks.3.mlp.fc1.bias", "vit.blocks.3.mlp.fc2.weight", "vit.blocks.3.mlp.fc2.bias", "vit.blocks.4.norm1.weight", "vit.blocks.4.norm1.bias", "vit.blocks.4.attn.qkv.weight", "vit.blocks.4.attn.qkv.bias", "vit.blocks.4.attn.proj.weight", "vit.blocks.4.attn.proj.bias", "vit.blocks.4.norm2.weight", "vit.blocks.4.norm2.bias", "vit.blocks.4.mlp.fc1.weight", "vit.blocks.4.mlp.fc1.bias", "vit.blocks.4.mlp.fc2.weight", "vit.blocks.4.mlp.fc2.bias", "vit.blocks.5.norm1.weight", "vit.blocks.5.norm1.bias", "vit.blocks.5.attn.qkv.weight", "vit.blocks.5.attn.qkv.bias", "vit.blocks.5.attn.proj.weight", "vit.blocks.5.attn.proj.bias", "vit.blocks.5.norm2.weight", "vit.blocks.5.norm2.bias", "vit.blocks.5.mlp.fc1.weight", "vit.blocks.5.mlp.fc1.bias", "vit.blocks.5.mlp.fc2.weight", "vit.blocks.5.mlp.fc2.bias", "vit.blocks.6.norm1.weight", "vit.blocks.6.norm1.bias", "vit.blocks.6.attn.qkv.weight", "vit.blocks.6.attn.qkv.bias", "vit.blocks.6.attn.proj.weight", "vit.blocks.6.attn.proj.bias", "vit.blocks.6.norm2.weight", "vit.blocks.6.norm2.bias", "vit.blocks.6.mlp.fc1.weight", "vit.blocks.6.mlp.fc1.bias", "vit.blocks.6.mlp.fc2.weight", "vit.blocks.6.mlp.fc2.bias", "vit.blocks.7.norm1.weight", "vit.blocks.7.norm1.bias", "vit.blocks.7.attn.qkv.weight", "vit.blocks.7.attn.qkv.bias", "vit.blocks.7.attn.proj.weight", "vit.blocks.7.attn.proj.bias", "vit.blocks.7.norm2.weight", "vit.blocks.7.norm2.bias", "vit.blocks.7.mlp.fc1.weight", "vit.blocks.7.mlp.fc1.bias", "vit.blocks.7.mlp.fc2.weight", "vit.blocks.7.mlp.fc2.bias", "vit.blocks.8.norm1.weight", "vit.blocks.8.norm1.bias", "vit.blocks.8.attn.qkv.weight", "vit.blocks.8.attn.qkv.bias", "vit.blocks.8.attn.proj.weight", "vit.blocks.8.attn.proj.bias", "vit.blocks.8.norm2.weight", "vit.blocks.8.norm2.bias", "vit.blocks.8.mlp.fc1.weight", "vit.blocks.8.mlp.fc1.bias", "vit.blocks.8.mlp.fc2.weight", "vit.blocks.8.mlp.fc2.bias", "vit.blocks.9.norm1.weight", "vit.blocks.9.norm1.bias", "vit.blocks.9.attn.qkv.weight", "vit.blocks.9.attn.qkv.bias", "vit.blocks.9.attn.proj.weight", "vit.blocks.9.attn.proj.bias", "vit.blocks.9.norm2.weight", "vit.blocks.9.norm2.bias", "vit.blocks.9.mlp.fc1.weight", "vit.blocks.9.mlp.fc1.bias", "vit.blocks.9.mlp.fc2.weight", "vit.blocks.9.mlp.fc2.bias", "vit.blocks.10.norm1.weight", "vit.blocks.10.norm1.bias", "vit.blocks.10.attn.qkv.weight", "vit.blocks.10.attn.qkv.bias", "vit.blocks.10.attn.proj.weight", "vit.blocks.10.attn.proj.bias", "vit.blocks.10.norm2.weight", "vit.blocks.10.norm2.bias", "vit.blocks.10.mlp.fc1.weight", "vit.blocks.10.mlp.fc1.bias", "vit.blocks.10.mlp.fc2.weight", "vit.blocks.10.mlp.fc2.bias", "vit.blocks.11.norm1.weight", "vit.blocks.11.norm1.bias", "vit.blocks.11.attn.qkv.weight", "vit.blocks.11.attn.qkv.bias", "vit.blocks.11.attn.proj.weight", "vit.blocks.11.attn.proj.bias", "vit.blocks.11.norm2.weight", "vit.blocks.11.norm2.bias", "vit.blocks.11.mlp.fc1.weight", "vit.blocks.11.mlp.fc1.bias", "vit.blocks.11.mlp.fc2.weight", "vit.blocks.11.mlp.fc2.bias", "vit.norm.weight", "vit.norm.bias". 
+	Unexpected key(s) in state_dict: "student", "teacher", "optimizer", "epoch", "args", "ibot_loss", "fp16_scaler". 
+Command exited with non-zero status 1
+	Command being timed: "python smart_microscope/test_tests.py"
+	User time (seconds): 27.66
+	System time (seconds): 7.18
+	Percent of CPU this job got: 47%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:14.11
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2214376
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 177
+	Minor (reclaiming a frame) page faults: 562902
+	Voluntary context switches: 60128
+	Involuntary context switches: 1573
+	Swaps: 0
+	File system inputs: 2683936
+	File system outputs: 64
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

@@ -1,0 +1,73 @@
+=== RUN: smart_microscope/test_tests.py ===
+Timestamp: Wed 11 Mar 11:13:49 CDT 2026
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 11:13:49 up  1:20,  2 users,  load average: 0.00, 0.04, 0.14
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       1.1Gi       1.9Gi        14Mi       781Mi       2.6Gi
+Swap:          511Mi       436Mi        75Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---
+Total images found: 40
+                                          image_path label  ... width height
+0  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+1  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+2  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+
+[3 rows x 7 columns]
+10X: 40 40X: 0
+Test size: 8 Train size: 32
+[INFO] Model Path: /home/anita/pi_tests/smart_microscope/models/best_model_Split_1.pt
+Attempting to fetch cytofm model
+Calling CytoFM (Adapter as nn.Module; engine loads backbone+ABMIL).
+[CytoFM] Unexpected keys: 10 (showing up to 5): ['vit.head.mlp.0.weight', 'vit.head.mlp.0.bias', 'vit.head.mlp.2.weight', 'vit.head.mlp.2.bias', 'vit.head.mlp.4.weight']
+Traceback (most recent call last):
+  File "/home/anita/pi_tests/smart_microscope/test_tests.py", line 58, in <module>
+    results = test.test_model(
+              ^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/test_data.py", line 464, in test_model
+    model = ML_models.call_model(model_name)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/ML_models.py", line 184, in call_model
+    return get_CytoFM_Adapter()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/ML_models.py", line 137, in get_CytoFM_Adapter
+    return CytoFMAdapter()
+           ^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/ML_models.py", line 106, in __init__
+    self.engine = CytoFMABMILInference(
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/cytofm/cytofm_infer.py", line 69, in __init__
+    self.classifier.load_state_dict(cls_state, strict=False)
+  File "/home/anita/pi_tests/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 2189, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for Linear:
+	size mismatch for weight: copying a param with shape torch.Size([1, 768]) from checkpoint, the shape in current model is torch.Size([2, 768]).
+	size mismatch for bias: copying a param with shape torch.Size([1]) from checkpoint, the shape in current model is torch.Size([2]).
+Command exited with non-zero status 1
+	Command being timed: "python smart_microscope/test_tests.py --model_name cytofm"
+	User time (seconds): 29.56
+	System time (seconds): 7.31
+	Percent of CPU this job got: 50%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:13.18
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2201500
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 793
+	Minor (reclaiming a frame) page faults: 544206
+	Voluntary context switches: 43531
+	Involuntary context switches: 2035
+	Swaps: 0
+	File system inputs: 2821160
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

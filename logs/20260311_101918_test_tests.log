@@ -1,0 +1,39 @@
+=== RUN: smart_microscope/test_tests.py ===
+Timestamp: 20260311_101918
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 10:19:18 up 26 min,  2 users,  load average: 0.03, 0.36, 0.40
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       974Mi       1.3Gi        29Mi       1.6Gi       2.8Gi
+Swap:          511Mi          0B       511Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---
+usage: test_tests.py [-h] --model_name MODEL_NAME
+test_tests.py: error: the following arguments are required: --model_name
+Command exited with non-zero status 2
+	Command being timed: "python smart_microscope/test_tests.py"
+	User time (seconds): 9.66
+	System time (seconds): 0.90
+	Percent of CPU this job got: 104%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:10.12
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 376588
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 79555
+	Voluntary context switches: 17
+	Involuntary context switches: 285
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 2

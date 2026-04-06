@@ -1,0 +1,65 @@
+=== RUN: smart_microscope/test_tests.py ===
+Timestamp: 20260308_180459
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 18:04:59 up  1:06,  2 users,  load average: 0.00, 0.00, 0.00
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       912Mi       1.8Gi        30Mi       1.1Gi       2.8Gi
+Swap:          511Mi          0B       511Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---
+Total images found: 40
+                                          image_path label  ... width height
+0  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+1  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+2  /home/anita/pi_tests/smart_microscope/CytoLabe...     B  ...  1920   1080
+
+[3 rows x 7 columns]
+10X: 40 40X: 0
+Test size: 8 Train size: 32
+[INFO] Model Path: /home/anita/pi_tests/smart_microscope/models/best_model_Split_1.pt
+Attempting to fetch cytofm model
+Calling CytoFM (Adapter as nn.Module; engine loads backbone+ABMIL).
+Traceback (most recent call last):
+  File "/home/anita/pi_tests/smart_microscope/test_tests.py", line 53, in <module>
+    results = test.test_model(
+              ^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/test_data.py", line 447, in test_model
+    model = ML_models.call_model(model_name)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/ML_models.py", line 170, in call_model
+    return get_CytoFM_Adapter()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/ML_models.py", line 123, in get_CytoFM_Adapter
+    return CytoFMAdapter()
+           ^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/ML_models.py", line 91, in __init__
+    from smart_microscope.cytofm.cytofm_infer import CytoFMABMILInference
+ModuleNotFoundError: No module named 'smart_microscope'
+Command exited with non-zero status 1
+	Command being timed: "python smart_microscope/test_tests.py"
+	User time (seconds): 9.33
+	System time (seconds): 0.90
+	Percent of CPU this job got: 104%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:09.78
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 363228
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 71921
+	Voluntary context switches: 17
+	Involuntary context switches: 287
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 24
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

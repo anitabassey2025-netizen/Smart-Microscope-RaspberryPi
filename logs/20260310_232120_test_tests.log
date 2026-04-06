@@ -1,0 +1,45 @@
+=== RUN: smart_microscope/test_tests.py ===
+Timestamp: 20260310_232120
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 23:21:20 up 44 min,  2 users,  load average: 0.31, 0.08, 0.03
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       1.1Gi       1.2Gi        28Mi       1.5Gi       2.6Gi
+Swap:          511Mi          0B       511Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---
+[0;93m2026-03-10 23:21:24.775421036 [W:onnxruntime:Default, device_discovery.cc:211 DiscoverDevicesForPlatform] GPU device discovery failed: device_discovery.cc:91 ReadFileContents Failed to open file: "/sys/class/drm/card1/device/vendor"[m
+Traceback (most recent call last):
+  File "/home/anita/pi_tests/smart_microscope/test_tests.py", line 33, in <module>
+    import test_data as test                # your model-testing utilities
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anita/pi_tests/smart_microscope/test_data.py", line 290, in <module>
+    from sklearn.metrics import (
+ModuleNotFoundError: No module named 'sklearn'
+Command exited with non-zero status 1
+	Command being timed: "python smart_microscope/test_tests.py"
+	User time (seconds): 7.16
+	System time (seconds): 0.70
+	Percent of CPU this job got: 102%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:07.65
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 316936
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 58851
+	Voluntary context switches: 6
+	Involuntary context switches: 325
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+
+# Model weights (DO NOT COMMIT)
+smart_microscope/models/
+*.pth
+*.pt
+*.onnx
+
+# OS / editor
+.DS_Store
+.vscode/
+ 

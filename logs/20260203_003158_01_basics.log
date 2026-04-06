@@ -1,0 +1,45 @@
+=== RUN: 01_basics.py ===
+Timestamp: 20260203_003158
+PWD: /home/anita/pi_tests
+Python: Python 3.11.2
+Venv: /home/anita/pi_tests/.venv
+
+--- SYSTEM BEFORE ---
+ 00:31:58 up 8 min,  2 users,  load average: 0.06, 0.20, 0.14
+               total        used        free      shared  buff/cache   available
+Mem:           1.8Gi       789Mi       416Mi        25Mi       730Mi       1.0Gi
+Swap:          511Mi          0B       511Mi
+
+--- RUNNING (/usr/bin/time -v gives peak RAM + CPU) ---
+Machine: aarch64
+RSS start (MB): 8.4
+Compute time (s): 0.371
+RSS end (MB): 8.4
+	Command being timed: "python 01_basics.py"
+	User time (seconds): 0.43
+	System time (seconds): 0.03
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.47
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8688
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 1104
+	Voluntary context switches: 3
+	Involuntary context switches: 11
+	Swaps: 0
+	File system inputs: 136
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+
+--- SYSTEM AFTER ---
+               total        used        free      shared  buff/cache   available
+Mem:           1.8Gi       791Mi       414Mi        25Mi       730Mi       1.0Gi
+Swap:          511Mi          0B       511Mi
