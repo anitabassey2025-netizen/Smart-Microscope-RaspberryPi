@@ -139,9 +139,7 @@ README.md
 \## Installation (Initial Setup – Internet Required)
 
 
-
 These steps are performed \*\*once\*\*, during system provisioning.
-
 
 
 ```bash
@@ -151,11 +149,9 @@ git clone https://github.com/anitabassey2025-netizen/Smart-Microscope-RaspberryP
 cd Smart-Microscope-RaspberryPi
 
 
-
 python3 -m venv .venv
 
 source .venv/bin/activate
-
 
 
 pip install -r requirements.txt
@@ -170,11 +166,7 @@ This repository does not include trained model weight files (.pth, .pt) due to s
 
 Before running the system, ensure the following files exist in:
 
-
-
 \~/pi\_tests/smart\_microscope/models/
-
-
 
 Required:
 
