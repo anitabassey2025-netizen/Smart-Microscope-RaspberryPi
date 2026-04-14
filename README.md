@@ -1,252 +1,215 @@
-\# Smart Microscope – Offline Cytology Inference System (Raspberry Pi)
+# Smart Microscope AI Inference System
 
+## Overview
 
+This project runs AI-based cytology classification on a Raspberry Pi.
 
-This repository contains the full \*\*source code, documentation, and deployment instructions\*\*
+The system:
 
-for a Raspberry‑Pi–based smart microscope system developed for \*\*offline cytological analysis\*\*
+* Captures microscope images
+* Runs deep learning inference (ResNet, EfficientNetV2, WaveMix, Hybrid, CytoFM)
+* Outputs **Benign (B)** or **Suspicious (Malignant)**
+* Displays results in a touchscreen GUI
+* Saves predictions to CSV locally (no internet required)
 
-in low‑resource and rural settings (e.g., mobile clinics in Mali).
+---
 
+## System Architecture
 
+Laptop (Development)
+→ GitHub (Source of truth)
+→ Raspberry Pi (Deployment)
+→ Microscope (Hardware)
 
-The system supports:
+---
 
-\- Standard CNN classifiers (ResNet18, EfficientNetV2‑S, WaveMix)
+## Models Supported
 
-\- CytoFM (Vision Transformer + ABMIL for tile‑based cytology inference)
+* `resnet`  (currently used in GUI)
+* `efficientnetv2`
+* `wavemix`
+* `hybrid`
+* `cytofm` (advanced / experimental)
 
-\- Hybrid models combining CytoFM global features with CNN local features
+---
 
-\- Fully offline inference once provisioned
+## Folder Structure (on Raspberry Pi)
 
+```
+~/pi_tests/
+└── smart_microscope/
+    ├── appdevtest.py
+    ├── live_inference.py
+    ├── live_smoke_test.py
+    ├── test_tests.py
+    ├── test_data.py
+    ├── ML_models.py
+    ├── paths_config.py
+    ├── microfocus.py
+    ├── models/
+    ├── CytoLabeled/
+    └── outputs/
+```
 
+---
 
-> \*\*Important:\*\* Trained model weight files (`.pth`, `.pt`) are \*\*not included\*\* in this repository due to size limits and deployment requirements.  
+## Setup on Raspberry Pi
 
-> See \*\*“Model Weights \& Deployment”\*\* below.
+### 1. Create environment
 
-
-
-\---
-
-
-
-\## System Overview
-
-
-
-The Smart Microscope pipeline is designed for \*\*offline‑first medical inference\*\*:
-
-
-
-1\. Samples are imaged using a microscope + camera
-
-2\. Images are tiled and processed locally on a Raspberry Pi
-
-3\. CNNs and/or CytoFM models perform inference
-
-4\. Results are logged locally (no cloud dependency during use)
-
-
-
-Once the system is provisioned, \*\*no internet connection is required\*\* for clinical operation.
-
-
-
-\---
-
-
-
-\## Supported Models
-
-
-
-\### CNN Baselines
-
-\- ResNet18
-
-\- EfficientNetV2‑S
-
-\- WaveMix
-
-
-
-\### CytoFM
-
-\- Vision Transformer (ViT‑B/16)
-
-\- Adaptive Batch Multiple Instance Learning (ABMIL)
-
-\- Tile‑level aggregation for whole‑slide inference
-
-
-
-\### Hybrid Models
-
-\- CytoFM + ResNet18
-
-\- CytoFM + EfficientNetV2‑S  
-
-(using lightweight fusion heads)
-
-
-
-\---
-
-
-
-\## Repository Structure
-
-smart\_microscope/
-
-├── cytofm/                # CytoFM backbone and inference
-
-├── hybrid/                # Hybrid inference adapters
-
-├── models/                # (EMPTY in repo – see Model Weights section)
-
-├── test\_data.py
-
-├── test\_tests.py
-
-├── ML\_models.py
-
-├── image\_path.py
-
-├── live\_inference.py
-
-├── microfocus.py
-
-├── outputs/               # runtime outputs (not tracked)
-
-└── ...
-
-scripts/
-
-└── run\_and\_log.sh
-
-docs/
-
-└── project documentation
-
-README.md
-
-\---
-
-
-
-\## Installation (Initial Setup – Internet Required)
-
-
-These steps are performed \*\*once\*\*, during system provisioning.
-
-
-```bash
-
-git clone https://github.com/anitabassey2025-netizen/Smart-Microscope-RaspberryPi.git
-
-cd Smart-Microscope-RaspberryPi
-
-
-python3 -m venv .venv
-
+```
+cd ~/pi_tests
+python3 -m venv .venv --system-site-packages
 source .venv/bin/activate
+```
 
+---
 
+### 2. Install dependencies
+
+```
 pip install -r requirements.txt
+```
 
+---
 
+### 3. Install GPIO (required for hardware)
 
+```
+sudo apt install -y python3-rpi.gpio
+```
 
+---
 
-\###Model Weights \& Deployment (IMPORTANT)
+## Running the System
 
-This repository does not include trained model weight files (.pth, .pt) due to size limits and offline deployment requirements. During initial SD card setup, while the Raspberry Pi has access to a reliable internet connection (e.g., home Wi‑Fi, university network, or office hotspot), users must download the model weight files from the provided Google Drive link and manually place them into \~/pi\_tests/smart\_microscope/models/. This download step is performed once during installation, before field use. After the weights are saved locally, the system runs fully offline, and no further internet access is required for patient testing in the field.
+---
 
-Before running the system, ensure the following files exist in:
+### GUI (Main Application)
 
-\~/pi\_tests/smart\_microscope/models/
+Run inside **VNC desktop terminal**:
 
-Required:
+```
+cd ~/pi_tests
+source .venv/bin/activate
+python smart_microscope/appdevtest.py
+```
 
-\- cytofm\_weights.pth (≈1.4 GB)
+Login:
 
-\- resnet\_best\_model\_Split\_1.pth
+```
+Username: admin
+Password: 1234
+```
 
-\- efficientnetv2\_best\_model\_Split\_1.pth
+---
 
-\- wavemix\_best\_model\_Split\_1.pth
+### GUI Features
 
-\- fusion\_head\_resnet.pt
+* Open Camera (requires hardware)
+* Capture → runs inference → saves CSV
+* Open Image → runs inference (no camera required)
+* Manual focus controls (GPIO)
+* CSV logging per session
 
-\- fusion\_head\_effnet.pt
+---
 
+## CSV Output
 
+Saved automatically to:
 
-These files must be placed in the directory above before running inference.
+```
+~/pi_tests/smart_microscope/outputs/slide_YYYYMMDD_HHMMSS/live_predictions.csv
+```
 
+Each row contains:
 
+* timestamp
+* image_path
+* model_name
+* predicted_class
+* malignant_probability
+* status
 
+---
 
+## Single Image Test (no GUI)
 
-\### Running Inference
+```
+python smart_microscope/live_smoke_test.py "smart_microscope/CytoLabeled/B/Image 835.jpeg" resnet
+```
 
-1\. Flash OS onto Raspberry Pi
+---
 
-2\. Clone GitHub repo (code only)
+## Dataset Test
 
-3\. Create virtual environment
+```
+PYTHONPATH="$HOME/pi_tests" ./run_and_log.sh smart_microscope/test_tests.py --model_name resnet
+```
 
-4\. Download model weights ONCE
+---
 
-5\. Copy weights into \~/pi\_tests/smart\_microscope/models/
+## Model Weights (IMPORTANT)
 
-6\. Run smoke tests
+Do NOT store in GitHub.
 
-7\. Seal the system
+Place manually on Pi:
 
-&#x09;### CODING Step-By-Step Instructions:
+```
+~/pi_tests/smart_microscope/models/resnet_best_model_Split_1.pth
+```
 
-&#x09;3.) Create virtual environment
-	Activate the environment:
+---
 
-&#x09;cd \~/pi\_tests
+## GitHub Rules
 
-&#x09;source .venv/bin/activate
+### Included:
 
-&#x09;export PYTHONPATH="$HOME/pi\_tests"
-	6.) Run Smoke tests
+* Python code
+* Scripts
+* Documentation
 
-&#x09;./run\_and\_log.sh smart\_microscope/test\_tests.py --model\_name resnet
+### Excluded:
 
-&#x09;./run\_and\_log.sh smart\_microscope/test\_tests.py --model\_name cytofm
+* `.venv/`
+* `outputs/`
+* `logs/`
+* model weights (`.pth`, `.pt`)
+* captured images
 
-&#x09;./run\_and\_log.sh smart\_microscope/test\_tests.py --model\_name hybrid\_cytofm\_resnet
+---
 
+## Development Workflow
 
+1. Edit code on laptop
+2. Push to GitHub
+3. Pull onto Raspberry Pi
+4. Run tests
 
+---
 
+## Current Status
 
-\###Designed for Offline \& Rural Use
+Model inference working
+GUI working
+CSV logging working
+VNC desktop working
+Hardware integration (camera + microscope) in progress
 
+---
 
+## Notes
 
-No internet required after setup
+* System works fully offline
+* WiFi only needed for:
 
-All computation runs locally on the Raspberry Pi
+  * SSH
+  * file transfer
+  * GitHub sync
 
-Suitable for mobile clinics and low‑connectivity environments
+---
 
-Model weights pre‑loaded during provisioning
+## Author
 
-
-
-
-
-\###License
-
-This project is provided for research and deployment collaboration purposes.
-
-Contact the project maintainers for usage and deployment permissions.
-
+Anita Itoro Bassey
+Smart Microscope AI Project
