@@ -57,6 +57,12 @@ print("10X:", len(x10_df), "40X:", len(x40_df))
 work_df = x10_df if len(x10_df) > 0 else df
 
 print("Using all images for testing:", len(work_df))
+work_df = work_df.iloc[:5]
+print("LIMITED TO ONE IMAGE FOR SANITY CHECK")
+print("Unique labels:", sorted(work_df["label"].unique()))
+print("Label counts:")
+print(work_df["label"].value_counts())
+print("============================")
 
 # 4) Run the model on the test split (batch_size=1 is safest on Pi)
 results = test.test_model(
@@ -78,3 +84,4 @@ for k, v in results.items():
             print(f"  {k}: (omitted)")
     else:
         print(f"  {k}: {v}")
+
