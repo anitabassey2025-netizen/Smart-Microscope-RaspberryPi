@@ -1,6 +1,12 @@
-# Python cache
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+.venv/
+venv/
 
 # Model weights (DO NOT COMMIT)
 smart_microscope/models/
@@ -17,3 +23,4 @@ logs/
 # OS / editor
 .DS_Store
 .vscode/
+
